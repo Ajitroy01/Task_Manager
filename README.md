@@ -28,17 +28,16 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Ajitroy01/repo.git
-   cd task-management-app
+   git clone https://github.com/Ajitroy01/Task_Manager.git
 2. Frontend :
 
    ```bash
-   cd frontend
+   cd task-management-system
    npm install
 3. Backend :
 
     ```bash
-    cd backend
+    cd Task_Manager_Backend
     
 <p>Configure your database settings in src/main/resources/application.properties</p>
 <p>Build and run the Spring Boot application</p>
