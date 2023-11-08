@@ -1,0 +1,91 @@
+<input type="checkbox" id="nav-toggle" />
+<div class="sidebar">
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        <a
+          (click)="toggleComponent('dashboard')"
+          [class.active]="currentComponent === 'dashboard'"
+        >
+          <span class="fas fa-tachometer-alt"></span>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a
+          (click)="toggleComponent('task')"
+          [class.active]="currentComponent === 'task'"
+        >
+          <span class="fas fa-users"></span>
+          <span>Create Task</span>
+        </a>
+      </li>
+      <li>
+        <a
+          (click)="toggleComponent('manage-task')"
+          [class.active]="currentComponent === 'manage-task'"
+        >
+          <span class="fas fa-boxes"></span>
+          <span>Manage Task</span>
+        </a>
+      </li>
+      <li>
+        <a
+          (click)="toggleComponent('update-task')"
+          [class.active]="currentComponent === 'update-task'"
+        >
+          <span class="fas fa-boxes"></span>
+          <span>Update Task</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="main-content">
+  <header>
+    <h2>
+      <label for="nav-toggle">
+        <span class="fas fa-bars"></span>
+      </label>
+      {{ currentComponent }}
+    </h2>
+  </header>
+  <main>
+    <div class="main__container">
+      <div *ngIf="currentComponent === 'dashboard'">
+        <div class="container">
+          <div class="card" id="card1">
+            <h2>Task Expiring Soon</h2>
+            <p>Status: In Progress</p>
+            <p>Priority: High</p>
+            <p>End Date: November 15, 2023</p>
+          </div>
+          <div class="card" id="card2">
+            <h2>Total Tasks</h2>
+            <p>25</p>
+          </div>
+          <div class="card" id="card3">
+            <h2>Pending Tasks</h2>
+            <p>8</p>
+          </div>
+          <div class="card" id="card4">
+            <h2>High & Medium Priority Tasks</h2>
+            <p>Total: 10</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="currentComponent === 'task'">
+        <app-task-creation></app-task-creation>
+      </div>
+
+      <div *ngIf="currentComponent === 'manage-task'">
+        <app-task-list></app-task-list>
+      </div>
+
+      <div *ngIf="currentComponent === 'update-task'">
+        <app-task-update></app-task-update>
+      </div>
+    </div>
+  </main>
+</div>

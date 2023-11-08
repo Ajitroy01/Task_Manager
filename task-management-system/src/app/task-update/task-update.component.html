@@ -1,0 +1,41 @@
+<div class="task-update">
+  <form [formGroup]="taskForm" (ngSubmit)="updateTask()">
+    <h2>Update Task</h2>
+    <div class="form-group">
+      <label for="taskId">Task ID:</label>
+      <input type="number" id="taskId" formControlName="taskId" required />
+    </div>
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" id="title" formControlName="title" required />
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        required
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <label for="dueDate">Due Date:</label>
+      <input type="date" id="dueDate" formControlName="dueDate" required />
+    </div>
+    <div class="form-group">
+      <label for="priority">Priority:</label>
+      <select id="priority" formControlName="priority" required>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select id="status" formControlName="status" required>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+      </select>
+    </div>
+    <button type="submit">Update Task</button>
+  </form>
+</div>

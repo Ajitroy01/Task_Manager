@@ -1,0 +1,51 @@
+<nav class="navbar" data-aos="fade-down" data-aos-delay="500">
+  <h1 class="navbar__logo">Logo</h1>
+  <button class="navbar__btn" [routerLink]="['/login-signup']">Login</button>
+</nav>
+<main>
+  <section class="home">
+    <section class="wrapper">
+      <div class="home_content">
+        <h1
+          class="main__title"
+          data-aos="fade-down"
+          data-aos-delay="1000"
+          data-aos-duration="1200"
+        >
+          Task management <br />
+          and lists Tool
+        </h1>
+        <p
+          class="main__text"
+          data-aos="fade-down"
+          data-aos-delay="1200"
+          data-aos-duration="1500"
+        >
+          We believe that designing products and services in close partnership
+          with our clients is the only way to have a real impact on their
+          business.
+        </p>
+        <button
+          class="btn"
+          data-aos="fade-down"
+          data-aos-delay="1500"
+          data-aos-duration="1800"
+          [routerLink]="['/login-signup']"
+        >
+          Get Started
+        </button>
+      </div>
+      <div
+        class="home__banner"
+        data-aos="fade-down"
+        data-aos-delay="1700"
+        data-aos-duration="1000"
+      >
+        <img
+          src="https://taskis.netlify.app/assets/img/banner-img.png"
+          alt="banner image"
+        />
+      </div>
+    </section>
+  </section>
+</main>
