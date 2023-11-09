@@ -10,17 +10,17 @@ Welcome to the Task Manager! This is a full-stack application for managing your 
 - Backend: Spring Boot (Java)
 - Database: MySQL
 
-![Homepage](/images/homepage.png)
+![Homepage](https://drive.google.com/uc?id=1LQc97-GyLKD9TUiSYGMCWrVto0m6c-Mj)
 
 **Homepage:**
 This is the landing page of the Task Manager application. Users can quickly get an overview of their tasks and access the main features.
 
-![Signup/Login](/images/signup-login.png)
+![Signup/Login](https://drive.google.com/uc?id=1X3I5yu1YtjrIobK_-ss4vpsNNRi6nqsl)
 
 **Signup/Login:**
 Users can register a new account or log in with their existing credentials. Secure authentication ensures data privacy.
 
-![Dashboard](/images/dashboard.png)
+![Dashboard](https://drive.google.com/uc?id=19fdlLYLQ8_u9L447_73djDP7Jq_sy6cy)
 
 **Dashboard:**
 The dashboard is the central hub for managing tasks. Users can create, update, and organize their tasks efficiently.
