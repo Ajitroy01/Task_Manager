@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.Entity.Users;
@@ -43,33 +43,21 @@ public class UserController {
 	    }
 	}
 	 
-	@PostMapping("/login")
-	public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password) {
-	    try {
-	        // Authenticate the user
-	        boolean isAuthenticated = userService.authenticateUser(email, password);
-
-	        if (isAuthenticated) {
-	            // Retrieve the authenticated user details
-	            Users authenticatedUser = userService.getUserByEmail(email);
-
-	            if (authenticatedUser != null) {
-	                int userId = authenticatedUser.getId();
-	                String userEmail = authenticatedUser.getEmail();
-
-	                logger.info("User logged in successfully.");
-	                return ResponseEntity.ok("{\"userId\": " + userId + ", \"email\": \"" + userEmail + "\"}");
+	 @PostMapping("/login")
+	    public ResponseEntity<?> userLogin(Authentication auth) {
+	        try {
+	            if (auth != null) {
+	                Users user = userService.getUserByEmail(auth.getName());
+	                return new ResponseEntity<Users>(user, HttpStatus.OK);
 	            } else {
-	                logger.error("User not found.");
-	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+	                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not authenticated.");
 	            }
-	        } else {
-	            logger.error("Login failed for user.");
-	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
+	        } catch (UserException e) {
+	            logger.error("Error during user login: " + e.getMessage());
+	            return ResponseEntity.badRequest().body("Login failed. " + e.getMessage());
+	        } catch (Exception e) {
+	            logger.error("Error during user login: " + e.getMessage());
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Login failed due to an internal error.");
 	        }
-	    } catch (UserException e) {
-	        logger.error("Error while logging in: " + e.getMessage());
-	        return ResponseEntity.badRequest().body(e.getMessage());
 	    }
-	}
 }

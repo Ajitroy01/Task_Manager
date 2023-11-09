@@ -1,41 +1,75 @@
-<div class="task-update">
-  <form [formGroup]="taskForm" (ngSubmit)="updateTask()">
-    <h2>Update Task</h2>
-    <div class="form-group">
-      <label for="taskId">Task ID:</label>
-      <input type="number" id="taskId" formControlName="taskId" required />
+<div class="task-updation-container">
+  <h2>Update Existing Task</h2>
+  <form
+    class="form task-update"
+    [formGroup]="taskForm"
+    (ngSubmit)="updateTask()"
+  >
+    <div class="form-group flex">
+      <label>
+        <span>Task ID:</span>
+        <input
+          type="number"
+          id="taskId"
+          formControlName="taskId"
+          required
+          class="input"
+        />
+      </label>
+      <label>
+        <span>Title:</span>
+        <input
+          type="text"
+          id="title"
+          formControlName="title"
+          required
+          class="input"
+        />
+      </label>
     </div>
     <div class="form-group">
-      <label for="title">Title:</label>
-      <input type="text" id="title" formControlName="title" required />
+      <label>
+        <span>Description:</span>
+        <textarea
+          id="description"
+          formControlName="description"
+          required
+          class="input"
+        ></textarea>
+      </label>
     </div>
     <div class="form-group">
-      <label for="description">Description:</label>
-      <textarea
-        id="description"
-        formControlName="description"
-        required
-      ></textarea>
+      <label>
+        <span>Due Date:</span>
+        <input
+          type="date"
+          id="dueDate"
+          formControlName="dueDate"
+          required
+          class="input"
+        />
+      </label>
     </div>
     <div class="form-group">
-      <label for="dueDate">Due Date:</label>
-      <input type="date" id="dueDate" formControlName="dueDate" required />
+      <label>
+        <span>Priority:</span>
+        <select id="priority" formControlName="priority" required class="input">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </label>
     </div>
     <div class="form-group">
-      <label for="priority">Priority:</label>
-      <select id="priority" formControlName="priority" required>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
+      <label>
+        <span>Status:</span>
+        <select id="status" formControlName="status" required class="input">
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+          <option value="overdue">Overdue</option>
+        </select>
+      </label>
     </div>
-    <div class="form-group">
-      <label for="status">Status:</label>
-      <select id="status" formControlName="status" required>
-        <option value="Pending">Pending</option>
-        <option value="Completed">Completed</option>
-      </select>
-    </div>
-    <button type="submit">Update Task</button>
+    <button class="submit" type="submit">Update Task</button>
   </form>
 </div>

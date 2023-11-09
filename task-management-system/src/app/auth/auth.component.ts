@@ -54,9 +54,11 @@ export class AuthComponent implements OnInit {
       const loginData: User = this.loginForm.value;
       this.authService.login(loginData).subscribe(
         (response) => {
+          console.log(response);
           const userData = {
-            id: response.userId,
-            name: response.email,
+            id: response.id,
+            name: response.name,
+            email: response.email,
           };
           localStorage.setItem('currentUser', JSON.stringify(userData));
           alert('Login successful.');

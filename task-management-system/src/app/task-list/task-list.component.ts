@@ -33,14 +33,14 @@ export class TaskListComponent implements OnInit {
   deleteTask(taskId: number) {
     // Delete the task using the task service
     this.taskService.deleteTask(taskId).subscribe(
-      (response) => {
-        // Handle the response (e.g., display a success message or perform any additional action)
-        console.log(`Task with ID ${taskId} deleted successfully.`);
-        this.fetchTasks(); // Refresh the tasks list after deletion
-      },
+      (response) => {},
       (error) => {
-        // Handle the error (e.g., display an error message)
-        console.error('Error deleting the task:', error);
+        if (error.status == 200) {
+          alert(`Task with ID ${taskId} deleted successfully.`);
+          this.fetchTasks();
+        } else {
+          alert('Error deleting Task.');
+        }
       }
     );
   }
@@ -48,14 +48,14 @@ export class TaskListComponent implements OnInit {
   markAsCompleted(taskId: number) {
     // Update the task status to "Pending" using the task service
     this.taskService.markTaskAsCompleted(taskId).subscribe(
-      (response) => {
-        // Handle the response (e.g., display a success message or perform any additional action)
-        console.log(`Task with ID ${taskId} marked as completed.`);
-        this.fetchTasks(); // Refresh the tasks list after marking as pending
-      },
+      (response) => {},
       (error) => {
-        // Handle the error (e.g., display an error message)
-        console.error('Error marking the task as completed:', error);
+        if (error.status == 200) {
+          alert(`Task with ID ${taskId} marked as completed.`);
+          this.fetchTasks();
+        } else {
+          alert('Error marking the task as completed.');
+        }
       }
     );
   }

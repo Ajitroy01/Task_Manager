@@ -76,14 +76,4 @@ public class UserServiceImpl implements UserService{
         }
     }
     
-    @Override
-    public boolean authenticateUser(String email, String password) {
-        UserDetails userDetails = customUserDetailsService.loadUserByUsername(email);
-
-        // Authenticate the user using Spring Security's built-in mechanism
-        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        return authentication.isAuthenticated();
-    }
 }

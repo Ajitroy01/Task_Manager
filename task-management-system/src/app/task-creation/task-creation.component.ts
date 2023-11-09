@@ -19,8 +19,8 @@ export class TaskCreationComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       dueDate: ['', Validators.required],
-      priority: ['High', Validators.required],
-      status: ['Pending', Validators.required],
+      priority: ['high', Validators.required],
+      status: ['pending', Validators.required],
     });
   }
 
@@ -38,11 +38,16 @@ export class TaskCreationComponent implements OnInit {
         taskData.user = { id: userId };
       }
 
-      this.taskService.createTask(taskData).subscribe((response) => {
-        // Handle the response here
-        alert('Task created successfully');
-        this.taskForm.reset();
-      });
+      this.taskService.createTask(taskData).subscribe(
+        (response) => {
+          alert('Task created successfully');
+          this.taskForm.reset();
+        },
+        (error) => {
+          alert('An error occurred while creating the task. Please try again.');
+          console.error('Error creating task:', error);
+        }
+      );
     }
   }
 }

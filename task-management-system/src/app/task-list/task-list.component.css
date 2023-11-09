@@ -26,7 +26,7 @@ tbody tr:hover {
 }
 
 button {
-  background-color: #3498db;
+  background-color: #e74c3c;
   color: #fff;
   padding: 8px 12px;
   border: none;
@@ -35,7 +35,7 @@ button {
 }
 
 button:hover {
-  background-color: #2a77aa;
+  background-color: #582621;
 }
 
 /* Adjust the button styles for better alignment */
@@ -45,9 +45,9 @@ button:first-child {
 
 /* Custom styling for the "Mark as Pending" button */
 button:last-child {
-  background-color: #e74c3c;
+  background-color: #37cfb6;
 }
 
 button:last-child:hover {
-  background-color: #c0392b;
+  background-color: #19443d;
 }

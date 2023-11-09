@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './models/user.model'; // Import your User interface
 
@@ -12,11 +12,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(user: User): Observable<any> {
-    const params = new HttpParams()
-      .set('email', user.email)
-      .set('password', user.password);
+    const headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa(`${user.email}:${user.password}`),
+    });
 
-    return this.http.post<any>(`${this.apiUrl}/login`, params);
+    return this.http.post<any>(`${this.apiUrl}/login`, {}, { headers });
   }
 
   register(user: User): Observable<any> {

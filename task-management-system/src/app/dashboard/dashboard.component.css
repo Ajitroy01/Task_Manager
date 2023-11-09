@@ -58,3 +58,42 @@ p {
   font-size: 18px;
   margin: 5px 0;
 }
+
+.col-12 {
+  width: 100%; /* Make it take the full width on all screen sizes */
+}
+
+.col-xl-8 {
+  max-width: 70%; /* Adjust the maximum width for larger screens */
+}
+
+.mb-4 {
+  margin-bottom: 1rem; /* Apply margin-bottom of 1rem */
+}
+
+.mb-xl-0 {
+  margin-bottom: 0; /* Remove margin-bottom for extra-large screens */
+
+  /* Add additional styles for responsiveness if needed */
+}
+
+/* Style for the heading */
+h3.font-weight-bold {
+  font-weight: bold;
+  font-size: 1.5rem; /* Adjust the font size */
+  margin-bottom: 0.5rem; /* Add margin-bottom for spacing */
+}
+
+/* Style for the subheading */
+h6.font-weight-normal {
+  font-weight: normal;
+  font-size: 1rem; /* Adjust the font size */
+  margin: 0; /* Reset margins to 0 */
+}
+
+/* Style for the text inside the span with the "text-primary" class */
+span.text-primary {
+  color: #37cfb6; /* Set the text color to the primary color */
+  font-weight: bold;
+  /* Add additional styles as needed for text inside the span */
+}

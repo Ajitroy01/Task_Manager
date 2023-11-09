@@ -9,5 +9,4 @@ public interface UserService {
 	 void deleteUser(int userId) throws UserException;
 	 Users getUserById(int userId) throws UserException;
 	 Users getUserByEmail(String username) throws UserException;
-	 boolean authenticateUser(String email, String password);
 }

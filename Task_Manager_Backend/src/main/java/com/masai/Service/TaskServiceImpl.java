@@ -22,7 +22,9 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task createTask(Task task) throws TaskException {
         try {
+            // Save the task
             Task createdTask = taskRepository.save(task);
+
             logger.info("Task created successfully: " + createdTask.getId());
             return createdTask;
         } catch (Exception e) {
@@ -30,6 +32,7 @@ public class TaskServiceImpl implements TaskService {
             throw new TaskException("Error creating task");
         }
     }
+
 
     @Override
     public Task updateTask(int taskId, Task updatedTask) throws TaskException {

@@ -31,18 +31,25 @@
             formControlName="name"
             autocomplete="name"
           />
+
           <input
             type="email"
             placeholder="Email"
             formControlName="email"
             autocomplete="email"
           />
+
           <input
             type="password"
             placeholder="Password"
             formControlName="password"
             autocomplete="new-password"
           />
+          <ul class="instructions">
+            <li>Password should be at least 8 characters.</li>
+            <li>Password should include one special character.</li>
+            <li>Password should include one number character.</li>
+          </ul>
           <button type="submit" id="create" [disabled]="registerForm.invalid">
             Sign Up
           </button>

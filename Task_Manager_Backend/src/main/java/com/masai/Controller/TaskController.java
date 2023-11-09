@@ -2,6 +2,7 @@ package com.masai.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,8 @@ import com.masai.Entity.Task;
 import com.masai.Exception.TaskException;
 import com.masai.Service.TaskService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -24,12 +27,12 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createTask(@RequestBody Task task) {
+    public ResponseEntity<?> createTask(@Valid @RequestBody Task task) {
         try {
             Task createdTask = taskService.createTask(task);
-            return ResponseEntity.ok(createdTask);
+            return new ResponseEntity<Task>(createdTask, HttpStatus.CREATED);
         } catch (TaskException e) {
-            return ResponseEntity.badRequest().body("Error while creating Task.");
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -37,9 +40,9 @@ public class TaskController {
     public ResponseEntity<?> updateTask(@PathVariable int id, @RequestBody Task task) {
         try {
             Task updatedTask = taskService.updateTask(id, task);
-            return ResponseEntity.ok(updatedTask);
+            return new ResponseEntity<Task>(updatedTask, HttpStatus.OK);
         } catch (TaskException e) {
-            return ResponseEntity.badRequest().body("Error while updating Task."); 
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -47,58 +50,58 @@ public class TaskController {
     public ResponseEntity<String> deleteTask(@PathVariable int id) {
         try {
             taskService.deleteTaskById(id);
-            return ResponseEntity.noContent().build();
+            return new ResponseEntity<String>("Task deleted successfully", HttpStatus.OK);
         } catch (TaskException e) {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping("/list/{userId}")
     public ResponseEntity<List<Task>> getTasksByUserId(@PathVariable int userId) {
         List<Task> tasks = taskService.getTasksByUserId(userId);
-        return ResponseEntity.ok(tasks);
+        return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getTaskById(@PathVariable int id) {
+    public ResponseEntity<?> getTaskById(@PathVariable int id) {
         try {
             Task task = taskService.getTaskById(id);
-            return ResponseEntity.ok(task);
+            return new ResponseEntity<Task>(task, HttpStatus.OK);
         } catch (TaskException e) {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
     @PutMapping("/complete/{taskId}")
-    public ResponseEntity<Task> markTaskAsCompleted(@PathVariable int taskId) {
+    public ResponseEntity<String> markTaskAsCompleted(@PathVariable int taskId) {
         try {
             Task task = taskService.getTaskById(taskId);
 
             if ("pending".equalsIgnoreCase(task.getStatus())) {
                 task.setStatus("completed");
                 Task completedTask = taskService.updateTask(taskId, task);
-                return ResponseEntity.ok(completedTask);
+                return new ResponseEntity<String>("Task marked as completed", HttpStatus.OK);
             } else {
-                return ResponseEntity.badRequest().body(null); 
+            	return new ResponseEntity<String>("Task is already marked as completed", HttpStatus.BAD_REQUEST);
             }
         } catch (TaskException e) {
-            return ResponseEntity.badRequest().body(null); // You can provide an error response here
+        	return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
     
-    @PutMapping("/pending/{taskId}")
-    public ResponseEntity<Task> markTaskAsPending(@PathVariable int taskId) {
+    @PutMapping("/overdue/{taskId}")
+    public ResponseEntity<String> markTaskAsPending(@PathVariable int taskId) {
         try {
             Task task = taskService.getTaskById(taskId);
-            
-            // Set the task status to "pending"
-            task.setStatus("pending");
-            
-            // Update the task in the database
-            Task updatedTask = taskService.updateTask(taskId, task);
-            
-            return ResponseEntity.ok(updatedTask);
+
+            if ("completed".equalsIgnoreCase(task.getStatus())) {
+                task.setStatus("overdue");
+                Task overdueTask = taskService.updateTask(taskId, task);
+                return new ResponseEntity<String>("Task marked as overdue", HttpStatus.OK);
+            } else {
+            	return new ResponseEntity<String>("Task is already marked as overdue", HttpStatus.BAD_REQUEST);
+            }
         } catch (TaskException e) {
-            return ResponseEntity.badRequest().body(null); // You can provide an error response here
+        	return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

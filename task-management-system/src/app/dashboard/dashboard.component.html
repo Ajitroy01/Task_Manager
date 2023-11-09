@@ -16,7 +16,7 @@
           (click)="toggleComponent('task')"
           [class.active]="currentComponent === 'task'"
         >
-          <span class="fas fa-users"></span>
+          <span class="fas fa-plus-circle"></span>
           <span>Create Task</span>
         </a>
       </li>
@@ -25,7 +25,7 @@
           (click)="toggleComponent('manage-task')"
           [class.active]="currentComponent === 'manage-task'"
         >
-          <span class="fas fa-boxes"></span>
+          <span class="fas fa-tasks"></span>
           <span>Manage Task</span>
         </a>
       </li>
@@ -34,8 +34,17 @@
           (click)="toggleComponent('update-task')"
           [class.active]="currentComponent === 'update-task'"
         >
-          <span class="fas fa-boxes"></span>
+          <span class="fas fa-edit"></span>
           <span>Update Task</span>
+        </a>
+      </li>
+      <li (click)="logout()">
+        <a
+          (click)="toggleComponent('logout')"
+          [class.active]="currentComponent === 'Logout'"
+        >
+          <span class="fas fa-sign-out-alt"></span>
+          <span>Logout</span>
         </a>
       </li>
     </ul>
@@ -53,24 +62,37 @@
   <main>
     <div class="main__container">
       <div *ngIf="currentComponent === 'dashboard'">
+        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+          <h3 class="font-weight-bold">Welcome {{ currentUser.name }}</h3>
+          <h6 class="font-weight-normal mb-0">
+            All systems are running smoothly! You have
+            <span class="text-primary"
+              >{{ pendingTasksCount }} Pending Tasks !</span
+            >
+          </h6>
+        </div>
         <div class="container">
           <div class="card" id="card1">
             <h2>Task Expiring Soon</h2>
-            <p>Status: In Progress</p>
-            <p>Priority: High</p>
-            <p>End Date: November 15, 2023</p>
+            <p>Title: {{ endingSoonTask?.title || "N/A" }}</p>
+            <p>Status: {{ endingSoonTask?.status || "N/A" }}</p>
+            <p>Priority: {{ endingSoonTask?.priority || "N/A" }}</p>
+            <p>
+              End Date:
+              {{ endingSoonTask?.dueDate | date : "longDate" || "N/A" }}
+            </p>
           </div>
           <div class="card" id="card2">
             <h2>Total Tasks</h2>
-            <p>25</p>
+            <p>{{ totalTasks }}</p>
           </div>
           <div class="card" id="card3">
             <h2>Pending Tasks</h2>
-            <p>8</p>
+            <p>{{ pendingTasksCount }}</p>
           </div>
           <div class="card" id="card4">
             <h2>High & Medium Priority Tasks</h2>
-            <p>Total: 10</p>
+            <p>Total: {{ highMediumPriorityTasksCount }}</p>
           </div>
         </div>
       </div>

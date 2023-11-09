@@ -1,30 +1,51 @@
 <div class="task-creation-container">
   <h2>Create a New Task</h2>
-  <form (ngSubmit)="createTask()" [formGroup]="taskForm">
-    <div class="form-group">
-      <label for="title">Title:</label>
-      <input type="text" id="title" formControlName="title" required />
+  <form class="form" (ngSubmit)="createTask()" [formGroup]="taskForm">
+    <div class="flex">
+      <label>
+        <span>Title</span>
+        <input
+          required
+          placeholder=""
+          type="text"
+          class="input"
+          id="title"
+          formControlName="title"
+        />
+      </label>
+      <label>
+        <span>Due Date</span>
+        <input
+          required
+          placeholder=""
+          type="date"
+          class="input"
+          id="dueDate"
+          formControlName="dueDate"
+        />
+      </label>
     </div>
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <textarea
+
+    <label>
+      <span>Description</span>
+      <input
+        required
+        placeholder=""
+        type="text"
+        class="input"
         id="description"
         formControlName="description"
-        required
-      ></textarea>
-    </div>
-    <div class="form-group">
-      <label for="dueDate">Due Date:</label>
-      <input type="date" id="dueDate" formControlName="dueDate" required />
-    </div>
-    <div class="form-group">
-      <label for="priority">Priority:</label>
-      <select id="priority" formControlName="priority" required>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
+      />
+    </label>
+    <label>
+      <span>Priority</span>
+      <select required class="input" id="priority" formControlName="priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
       </select>
-    </div>
-    <button type="submit" class="create-button">Create Task</button>
+    </label>
+
+    <button type="submit" class="create-button submit">Create Task</button>
   </form>
 </div>
